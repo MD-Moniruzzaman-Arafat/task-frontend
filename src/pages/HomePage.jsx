@@ -1,4 +1,5 @@
 import Banner from '../components/Banner/Banner';
+import Categories from '../components/Categories/Categories';
 import Companies from '../components/Companies/Companies';
 
 export default function HomePage() {
@@ -6,6 +7,7 @@ export default function HomePage() {
     <>
       <Banner />
       <Companies />
+      <Categories />
     </>
   );
 }

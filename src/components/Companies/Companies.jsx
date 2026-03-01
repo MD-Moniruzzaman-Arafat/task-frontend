@@ -7,16 +7,16 @@ import img5 from '../../assets/image/companies/vodafone-2017-logo.png';
 export default function Companies() {
   return (
     <>
-      <div className="container mx-auto my-10">
+      <div className="container mx-auto my-10 p-2">
         <p>
           <small className="text-[#BCBDC1]">Companies we helped grow</small>
         </p>
         <div className=" flex flex-wrap justify-between items-center gap-5 py-10">
           <img src={img5} alt="Vodafone Logo" />
           <img src={img2} alt="Intel Logo" />
-          <img src={img4} alt="Tesla Logo" />
           <img src={img1} alt="AMD Logo" />
           <img src={img3} alt="Talkit Logo" />
+          <img src={img4} alt="Tesla Logo" />
         </div>
       </div>
     </>
