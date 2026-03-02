@@ -1,6 +1,11 @@
 import { createBrowserRouter } from 'react-router';
+import DashBoardLayout from '../layouts/DashBoardLayout';
 import RootLayout from '../layouts/RootLayout';
+import JobPostFormPage from '../pages/DashBoard/JobPostFormPage';
+import ShowAllJobsPage from '../pages/DashBoard/ShowAllJobsPage';
 import HomePage from '../pages/HomePage';
+import LoginPage from '../pages/LoginPage';
+import RegisterPage from '../pages/RegisterPage';
 
 const router = createBrowserRouter([
   {
@@ -10,6 +15,28 @@ const router = createBrowserRouter([
       {
         index: true,
         Component: HomePage,
+      },
+    ],
+  },
+  {
+    path: '/dashboard',
+    element: <DashBoardLayout />,
+    children: [
+      {
+        index: true,
+        Component: LoginPage,
+      },
+      {
+        path: 'signup',
+        Component: RegisterPage,
+      },
+      {
+        path: 'show-all-jobs',
+        element: <ShowAllJobsPage />,
+      },
+      {
+        path: 'add-new-job',
+        element: <JobPostFormPage />,
       },
     ],
   },
