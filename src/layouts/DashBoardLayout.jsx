@@ -1,9 +1,21 @@
 import { useState } from 'react';
 import { NavLink, Outlet } from 'react-router';
 import logo from '../assets/image/header/Logo.png';
+import useAuth from '../hooks/useAuth';
 
 export default function DashBoardLayout() {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, logoutUser, setError, setUser } = useAuth();
+  console.log('Dashboard Layout User:', user);
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+      setUser(null);
+      console.log('Logging out user:', user);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   const navLinks = [
     { label: 'All Jobs List', href: 'show-all-jobs' },
@@ -40,18 +52,14 @@ export default function DashBoardLayout() {
 
             {/* Desktop Buttons */}
             <div className="hidden md:flex items-center gap-3">
-              <a
-                href="#"
-                className="nav-font text-[13px] font-semibold text-[#4640DE] hover:text-[#4640DE] px-4 py-2 rounded-lg transition-colors duration-200"
-              >
-                Log in
-              </a>
-              <a
-                href="#"
-                className="btn-glow nav-font text-[13px] font-bold text-[#ffffff] bg-[#4640DE] hover:bg-[#4640DE] px-5 py-2.25  transition-all duration-200"
-              >
-                Sign up
-              </a>
+              {user && (
+                <button
+                  onClick={handleLogout}
+                  className="btn-glow nav-font text-[13px] font-bold text-[#ffffff] bg-[#4640DE] hover:bg-[#4640DE] px-5 py-2.25 cursor-pointer  transition-all duration-200"
+                >
+                  LogOut
+                </button>
+              )}
             </div>
 
             {/* Mobile Hamburger */}

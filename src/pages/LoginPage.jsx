@@ -1,7 +1,8 @@
 // LoginPage.jsx
 import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc'; // Google icon
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
+import useAuth from '../hooks/useAuth';
 
 export default function LoginPage() {
   const {
@@ -9,10 +10,24 @@ export default function LoginPage() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { signInUser, setError } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const onSubmit = (data) => {
+  const from = location.state?.from?.pathname || 'show-all-jobs';
+
+  const onSubmit = async (data) => {
     console.log('Login Data:', data);
     // call your login API here
+    try {
+      const result = await signInUser(data.email, data.password);
+      console.log('Login Result:', result);
+      if (result.user) {
+        navigate(from, { replace: true });
+      }
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   const handleGoogleLogin = () => {

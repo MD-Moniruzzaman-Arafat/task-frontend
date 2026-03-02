@@ -1,7 +1,9 @@
 // RegisterPage.jsx
+import { updateProfile } from 'firebase/auth';
 import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
+import useAuth from '../hooks/useAuth';
 
 export default function RegisterPage() {
   const {
@@ -9,10 +11,29 @@ export default function RegisterPage() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { createUser, setError } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const onSubmit = (data) => {
+  const from = location.state?.from?.pathname || '/dashboard';
+
+  const onSubmit = async (data) => {
     console.log('Register Data:', data);
     // call your API to create a new account
+    try {
+      const result = await createUser(data.email, data.password);
+      updateProfile(result.user, {
+        displayName: data.name,
+        photoURL: 'https://example.com/jane-q-user/profile.jpg',
+      });
+      if (result.user) {
+        alert('User registered successfully!');
+        navigate(from, { replace: true });
+      }
+      console.log('User created:', result.user);
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   const handleGoogleRegister = () => {
