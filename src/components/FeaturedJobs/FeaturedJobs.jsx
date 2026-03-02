@@ -12,7 +12,7 @@ import FeaturedJobsCard from './FeaturedJobsCard';
 export default function FeaturedJobs() {
   return (
     <>
-      <section class="container mx-auto py-10 p-2">
+      <section class="max-w-7xl mx-auto py-10 p-2">
         {/* <!-- Header --> */}
         <div class="flex items-center justify-between mb-10">
           <h2 class="text-3xl font-bold">

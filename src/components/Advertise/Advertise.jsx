@@ -4,7 +4,7 @@ import img2 from '../../assets/image/Dashboard Company.png';
 export default function Advertise() {
   return (
     <>
-      <div class="relative container mx-auto bg-blue-600 overflow-hidden  my-10">
+      <div class="relative max-w-7xl mx-auto bg-blue-600 overflow-hidden  my-10">
         <div class="relative  bg-blue-600 overflow-hidden ">
           {/* <!-- White Triangle --> */}
           <div

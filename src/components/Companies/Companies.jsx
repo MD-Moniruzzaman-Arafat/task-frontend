@@ -7,7 +7,7 @@ import img5 from '../../assets/image/companies/vodafone-2017-logo.png';
 export default function Companies() {
   return (
     <>
-      <div className="container mx-auto my-10 p-2">
+      <div className="max-w-7xl mx-auto my-10 p-2">
         <p>
           <small className="text-[#BCBDC1]">Companies we helped grow</small>
         </p>

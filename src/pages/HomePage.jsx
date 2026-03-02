@@ -3,6 +3,7 @@ import Banner from '../components/Banner/Banner';
 import Categories from '../components/Categories/Categories';
 import Companies from '../components/Companies/Companies';
 import FeaturedJobs from '../components/FeaturedJobs/FeaturedJobs';
+import LatestJobs from '../components/LatestJobs/LatestJobs';
 
 export default function HomePage() {
   return (
@@ -12,6 +13,7 @@ export default function HomePage() {
       <Categories />
       <Advertise />
       <FeaturedJobs />
+      <LatestJobs />
     </>
   );
 }

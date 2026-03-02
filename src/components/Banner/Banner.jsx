@@ -9,7 +9,7 @@ export default function Banner() {
   return (
     <>
       <div className="bg-[#F8F8FD]">
-        <div className="container mx-auto flex flex-col lg:flex-row items-center p-2 lg:p-0 ">
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center p-2 lg:p-0 ">
           {/* left */}
           <div className="flex-1  space-y-6">
             <div>
@@ -27,7 +27,7 @@ export default function Banner() {
               heights and passionate about startups.
             </p>
             <div className="bg-[#ffffff] flex flex-col lg:flex-row py-5 px-3 justify-between items-center gap-4">
-              <div className="flex items-center w-60">
+              <div className="flex items-center w-50">
                 <CiSearch />
                 <input
                   className="focus:outline-none border-b border-gray-300 px-5 py-2 text-xs w-full"
@@ -37,7 +37,7 @@ export default function Banner() {
                   placeholder="Job title or keyword"
                 />
               </div>
-              <div className="relative inline-block text-left w-60">
+              <div className="relative inline-block text-left w-50">
                 <div className="flex items-center">
                   <GrLocation />
                   <Select
