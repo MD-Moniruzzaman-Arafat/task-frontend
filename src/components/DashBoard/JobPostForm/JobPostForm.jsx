@@ -60,7 +60,7 @@ export default function JobPostForm() {
       await api.post('/jobs', jobPost);
 
       alert('Job posted successfully!');
-      reset();
+      // reset();
     } catch (error) {
       console.error('Error posting job:', error);
       alert('Something went wrong!');

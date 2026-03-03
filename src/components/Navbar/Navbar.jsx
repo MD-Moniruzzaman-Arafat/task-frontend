@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router';
 import logo from '../../assets/image/header/Logo.png';
 
 const Navbar = () => {
@@ -16,9 +17,9 @@ const Navbar = () => {
           <div className="flex items-center justify-between h-16 lg:h-18">
             <div className="flex items-center gap-10 justify-between h-16 lg:h-18">
               {/* Logo */}
-              <a href="#" className="w-30">
+              <Link to={'/'} className="w-30">
                 <img src={logo} alt="Logo" />
-              </a>
+              </Link>
 
               {/* Desktop Links */}
               <div className="hidden md:flex gap-10">

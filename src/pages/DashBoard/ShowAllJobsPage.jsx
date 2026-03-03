@@ -28,7 +28,7 @@ export default function ShowAllJobsPage() {
   });
 
   // Fetch jobs
-  const { data, isLoading, isError, error } = useQuery({
+  const { data, isError, error } = useQuery({
     queryKey: ['jobs', filters],
     queryFn: async () => {
       const params = new URLSearchParams();
@@ -117,33 +117,6 @@ export default function ShowAllJobsPage() {
             <option value="Freelance">Freelance</option>
             <option value="Contract">Contract</option>
           </select>
-        </div>
-
-        {/* Pagination */}
-        <div className="flex justify-center gap-2 mt-4">
-          <button
-            disabled={filters.page === 1}
-            onClick={() =>
-              setFilters((prev) => ({ ...prev, page: prev.page - 1 }))
-            }
-            className="px-3 py-1 bg-gray-300 rounded disabled:opacity-50"
-          >
-            Previous
-          </button>
-          <span className="px-3 py-1">
-            Page {filters.page} / {Math.ceil(data?.data.length / filters.limit)}
-          </span>
-          <button
-            disabled={
-              filters.page >= Math.ceil(data?.data.length / filters.limit)
-            }
-            onClick={() =>
-              setFilters((prev) => ({ ...prev, page: prev.page + 1 }))
-            }
-            className="px-3 py-1 bg-gray-300 rounded disabled:opacity-50"
-          >
-            Next
-          </button>
         </div>
       </div>
 
