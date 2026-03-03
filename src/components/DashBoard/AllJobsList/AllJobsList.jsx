@@ -1,8 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import useAxios from '../../../hooks/useAxios';
 
 export default function AllJobsList() {
   const api = useAxios();
+  const queryClient = useQueryClient();
 
   const {
     data: jobs = [],
@@ -16,6 +17,19 @@ export default function AllJobsList() {
       return res.data;
     },
   });
+
+  const deleteMutation = useMutation({
+    mutationFn: (id) => api.delete(`/jobs/${id}`),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['jobs']);
+    },
+  });
+
+  const handleDelete = (id) => {
+    if (confirm('Are you sure you want to delete this job?')) {
+      deleteMutation.mutate(id);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -102,7 +116,10 @@ export default function AllJobsList() {
                         Edit
                       </button>
 
-                      <button className="px-3 py-1 text-xs rounded-md bg-red-500 text-white hover:bg-red-600">
+                      <button
+                        onClick={() => handleDelete(job._id)}
+                        className="px-3 py-1 text-xs rounded-md bg-red-500 text-white hover:bg-red-600"
+                      >
                         Delete
                       </button>
                     </div>
