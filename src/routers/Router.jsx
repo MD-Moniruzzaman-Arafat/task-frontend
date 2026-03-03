@@ -9,52 +9,33 @@ import HomePage from '../pages/HomePage';
 import JobDetailsPage from '../pages/JobDetailsPage';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
+import PrivateRoute from './PrivateRoute';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <RootLayout />,
     children: [
-      {
-        index: true,
-        Component: HomePage,
-      },
-      {
-        path: 'show-jobs',
-        element: <ShowAllJobsPage />,
-      },
-      {
-        path: 'jobsDetails/:id',
-        element: <JobDetailsPage />,
-      },
+      { index: true, element: <HomePage /> },
+      { path: 'show-jobs', element: <ShowAllJobsPage /> },
+      { path: 'jobsDetails/:id', element: <JobDetailsPage /> },
     ],
   },
   {
     path: '/dashboard',
-    element: <DashBoardLayout />,
+    element: (
+      <PrivateRoute>
+        <DashBoardLayout />
+      </PrivateRoute>
+    ),
     children: [
-      {
-        index: true,
-        Component: LoginPage,
-      },
-      {
-        path: 'signup',
-        Component: RegisterPage,
-      },
-      {
-        path: 'show-all-jobs',
-        element: <AllJobsListPage />,
-      },
-      {
-        path: 'add-new-job',
-        element: <JobPostFormPage />,
-      },
-      {
-        path: 'applications-list',
-        element: <AllApplicationListPage />,
-      },
+      { index: true, element: <AllJobsListPage /> },
+      { path: 'add-new-job', element: <JobPostFormPage /> },
+      { path: 'applications-list', element: <AllApplicationListPage /> },
     ],
   },
+  { path: 'login-page', element: <LoginPage /> },
+  { path: 'signup', element: <RegisterPage /> },
 ]);
 
 export default router;

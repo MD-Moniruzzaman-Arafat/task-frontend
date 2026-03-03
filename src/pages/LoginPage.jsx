@@ -14,7 +14,7 @@ export default function LoginPage() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const from = location.state?.from?.pathname || 'show-all-jobs';
+  const from = location.state?.from?.pathname || '/dashboard';
 
   const onSubmit = async (data) => {
     console.log('Login Data:', data);

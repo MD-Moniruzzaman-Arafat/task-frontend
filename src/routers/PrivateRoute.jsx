@@ -5,10 +5,10 @@ export default function PrivateRoute({ children }) {
   const { user } = useAuth();
   const location = useLocation();
 
-  const from = location.state?.from?.pathname || 'show-all-jobs';
+  const from = location.state?.from?.pathname || 'dashboard';
 
   if (!user) {
-    return <Navigate to="/dashboard" replace state={{ from }} />;
+    return <Navigate to="/login-page" replace state={{ from }} />;
   }
 
   return <>{children}</>;

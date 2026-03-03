@@ -17,7 +17,7 @@ export default function DashBoardLayout() {
     }
   };
   const navLinks = [
-    { label: 'All Jobs List', href: 'show-all-jobs' },
+    { label: 'All Jobs List', href: '/dashboard' },
     { label: 'Add New Job', href: 'add-new-job' },
     { label: 'Applications List', href: 'applications-list' },
   ];
