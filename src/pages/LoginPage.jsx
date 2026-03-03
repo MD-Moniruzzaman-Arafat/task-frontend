@@ -120,7 +120,7 @@ export default function LoginPage() {
         <p className="text-center text-gray-500 mt-4">
           Don't have an account?{' '}
           <Link
-            to="signup"
+            to="/signup"
             className="text-blue-500 hover:underline cursor-pointer"
           >
             Sign up
