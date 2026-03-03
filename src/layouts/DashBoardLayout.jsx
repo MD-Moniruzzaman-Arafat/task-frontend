@@ -16,10 +16,10 @@ export default function DashBoardLayout() {
       setError(error.message);
     }
   };
-
   const navLinks = [
     { label: 'All Jobs List', href: 'show-all-jobs' },
     { label: 'Add New Job', href: 'add-new-job' },
+    { label: 'Applications List', href: 'applications-list' },
   ];
   return (
     <>

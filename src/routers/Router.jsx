@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router';
 import DashBoardLayout from '../layouts/DashBoardLayout';
 import RootLayout from '../layouts/RootLayout';
+import AllApplicationListPage from '../pages/DashBoard/AllApplicationListPage';
 import AllJobsListPage from '../pages/DashBoard/AllJobsListPage';
 import JobPostFormPage from '../pages/DashBoard/JobPostFormPage';
 import ShowAllJobsPage from '../pages/DashBoard/ShowAllJobsPage';
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: 'add-new-job',
         element: <JobPostFormPage />,
+      },
+      {
+        path: 'applications-list',
+        element: <AllApplicationListPage />,
       },
     ],
   },

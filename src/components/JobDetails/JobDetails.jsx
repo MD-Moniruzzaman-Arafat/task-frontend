@@ -1,8 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import useAxios from '../../hooks/useAxios';
+import ApplyModal from '../ApplyModal/ApplyModal';
 
 export default function JobDetails() {
+  const [isOpen, setIsOpen] = useState(false);
   const { id } = useParams();
   const api = useAxios();
   const navigate = useNavigate();
@@ -17,7 +20,7 @@ export default function JobDetails() {
       return res.data;
     },
   });
-  console.log('Fetched Job Details:', job.data);
+  console.log('Fetched Job Details:', job?.data._id);
   if (isLoading)
     return (
       <div className="flex justify-center items-center h-screen">
@@ -34,6 +37,9 @@ export default function JobDetails() {
 
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-4">
+      {isOpen && (
+        <ApplyModal jobId={job.data._id} onClose={() => setIsOpen(false)} />
+      )}
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-2xl overflow-hidden">
         {/* Job Image */}
         {job?.data?.image?.url && (
@@ -99,7 +105,10 @@ export default function JobDetails() {
 
           {/* Action Buttons */}
           <div className="mt-8 flex gap-4">
-            <button className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+            <button
+              onClick={() => setIsOpen(true)}
+              className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+            >
               Apply Now
             </button>
 
