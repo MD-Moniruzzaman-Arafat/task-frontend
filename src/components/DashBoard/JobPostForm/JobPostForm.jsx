@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import useAxios from '../../../hooks/useAxios';
 
 export default function JobPostForm() {
   const {
@@ -9,6 +10,7 @@ export default function JobPostForm() {
     formState: { errors },
     reset,
   } = useForm();
+  const api = useAxios();
 
   const [loading, setLoading] = useState(false);
 
@@ -23,9 +25,15 @@ export default function JobPostForm() {
       formData.append('image', data.image[0]);
 
       const imgbbApiKey = import.meta.env.VITE_IMAGE_BB_API_KEY; // store in .env
+      console.log(imgbbApiKey);
       const res = await axios.post(
         `https://api.imgbb.com/1/upload?key=${imgbbApiKey}`,
-        formData
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
       );
 
       const imageUrl = res.data.data.url;
@@ -40,13 +48,16 @@ export default function JobPostForm() {
         description: data.description,
         salary_range: data.salary_range,
         job_type: data.job_type,
-        image: imageUrl, // send the image URL
+        image: {
+          url: imageUrl,
+          public_id: null,
+        },
       };
 
       console.log('Job Post Data:', jobPost);
 
       // 3️⃣ Send to your backend API
-      // await axios.post('http://localhost:3000/jobs', jobPost);
+      await api.post('/jobs', jobPost);
 
       alert('Job posted successfully!');
       reset();
@@ -103,10 +114,10 @@ export default function JobPostForm() {
             className="w-full px-4 py-2 border rounded-lg"
           >
             <option value="">Select Category</option>
-            <option value="IT">IT</option>
             <option value="Marketing">Marketing</option>
-            <option value="Finance">Finance</option>
             <option value="Design">Design</option>
+            <option value="Technology">Technology</option>
+            <option value="Business">Business</option>
           </select>
           {errors.category && (
             <p className="text-red-500 text-sm">{errors.category.message}</p>
@@ -150,6 +161,7 @@ export default function JobPostForm() {
             <option value="Part-time">Part-time</option>
             <option value="Internship">Internship</option>
             <option value="Freelance">Freelance</option>
+            <option value="Contract">Contract</option>
           </select>
           {errors.job_type && (
             <p className="text-red-500 text-sm">{errors.job_type.message}</p>
