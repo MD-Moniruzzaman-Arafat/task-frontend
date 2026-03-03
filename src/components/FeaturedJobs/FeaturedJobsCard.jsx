@@ -7,6 +7,12 @@ export default function FeaturedJobsCard({
   description,
   tags,
 }) {
+  const tagStyles = {
+    Marketing: 'bg-orange-100 text-orange-500',
+    Design: 'bg-[#EEFAF7] text-[#56CDAD]',
+    Business: 'bg-[#ECECFC] text-[#514BE0]',
+    Technology: 'bg-[#FFF0ED] text-[#FF6550]',
+  };
   return (
     <>
       <div class="max-w-sm  border border-[#E0E6F0] p-6 bg-white shadow-sm hover:shadow-md transition cursor-pointer">
@@ -38,25 +44,13 @@ export default function FeaturedJobsCard({
 
         {/* <!-- Tags --> */}
         <div className="flex flex-wrap gap-3">
-          {tags.map((tag, index) => {
-            const tagStyles = {
-              Marketing: 'bg-orange-100 text-orange-500',
-              Design: 'bg-[#EEFAF7] text-[#56CDAD]',
-              Business: 'bg-[#ECECFC] text-[#514BE0]',
-              Technology: 'bg-[#FFF0ED] text-[#FF6550]',
-            };
-
-            return (
-              <span
-                key={index}
-                className={`px-4 py-1 text-sm rounded-full font-medium
-          ${tagStyles[tag] || 'bg-gray-100 text-gray-500'}
+          <span
+            className={`px-4 py-1 text-sm rounded-full font-medium
+          ${tagStyles[tags] || 'bg-gray-100 text-gray-500'}
         `}
-              >
-                {tag}
-              </span>
-            );
-          })}
+          >
+            {tags}
+          </span>
         </div>
       </div>
     </>

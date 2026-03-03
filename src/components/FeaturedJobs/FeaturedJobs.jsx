@@ -1,15 +1,39 @@
+import { useQuery } from '@tanstack/react-query';
 import { IoIosArrowRoundForward } from 'react-icons/io';
-import img1 from '../../assets/image/logos/BvBoaEET_400x400 1.png';
-import img3 from '../../assets/image/logos/Company Logo.png';
-import img5 from '../../assets/image/logos/dfds.png';
-import img2 from '../../assets/image/logos/Dropbox.png';
-import img6 from '../../assets/image/logos/godaddy-logo-0 1.png';
-import img8 from '../../assets/image/logos/qUvcta52_400x400 1.png';
-import img4 from '../../assets/image/logos/trd.png';
-import img7 from '../../assets/image/logos/wwwyy.png';
+import { Link } from 'react-router';
+import useAxios from '../../hooks/useAxios';
 import FeaturedJobsCard from './FeaturedJobsCard';
 
 export default function FeaturedJobs() {
+  const api = useAxios();
+  const {
+    data: jobs = [],
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ['jobs'],
+    queryFn: async () => {
+      const res = await api.get('/jobs');
+      return res.data;
+    },
+  });
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <span className="loading loading-spinner text-primary"></span>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="text-center text-red-500 mt-10">
+        Error: {error.message}
+      </div>
+    );
+  }
   return (
     <>
       <section class="max-w-7xl mx-auto py-10 p-2">
@@ -19,18 +43,30 @@ export default function FeaturedJobs() {
             Featured <span class="text-blue-500">Jobs</span>
           </h2>
 
-          <a
-            href="#"
+          <Link
+            to="/show-jobs"
             class="hidden lg:flex items-center gap-2 text-sm text-blue-600 hover:underline"
           >
             Show all jobs <IoIosArrowRoundForward className="text-2xl" />
-          </a>
+          </Link>
         </div>
 
         {/* <!-- Grid --> */}
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {/* <!-- Card --> */}
-          <FeaturedJobsCard
+          {jobs.data.slice(0, 8).map((job) => (
+            <FeaturedJobsCard
+              key={job._id}
+              logo={job.image.url}
+              jobType={job.job_type}
+              title={job.title}
+              company={job.company}
+              location={job.location}
+              description={job.description}
+              tags={job.category}
+            />
+          ))}
+          {/* <FeaturedJobsCard
             logo={img1}
             jobType="Full Time"
             title="Email Marketing"
@@ -102,15 +138,15 @@ export default function FeaturedJobs() {
             location="Madrid, Spain"
             description="Revolut is looking for Email Marketing to help team manage email campaigns and improve engagement."
             tags={['Marketing', 'Design']}
-          />
+          /> */}
         </div>
         <div class="lg:hidden flex items-center justify-between mt-10">
-          <a
-            href="#"
+          <Link
+            to="/show-jobs"
             class="flex text-blue-600 items-center gap-2 text-sm  hover:underline"
           >
             Show all jobs <IoIosArrowRoundForward className="text-2xl" />
-          </a>
+          </Link>
         </div>
       </section>
     </>
