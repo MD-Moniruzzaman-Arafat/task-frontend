@@ -5,6 +5,7 @@ import AllJobsListPage from '../pages/DashBoard/AllJobsListPage';
 import JobPostFormPage from '../pages/DashBoard/JobPostFormPage';
 import ShowAllJobsPage from '../pages/DashBoard/ShowAllJobsPage';
 import HomePage from '../pages/HomePage';
+import JobDetailsPage from '../pages/JobDetailsPage';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
 
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: 'show-jobs',
         element: <ShowAllJobsPage />,
+      },
+      {
+        path: 'jobsDetails/:id',
+        element: <JobDetailsPage />,
       },
     ],
   },

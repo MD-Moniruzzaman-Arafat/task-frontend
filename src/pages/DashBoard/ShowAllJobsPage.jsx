@@ -40,6 +40,7 @@ export default function ShowAllJobsPage() {
           {jobs.data.map((job) => (
             <FeaturedJobsCard
               key={job._id}
+              id={job._id}
               logo={job.image.url}
               jobType={job.job_type}
               title={job.title}
